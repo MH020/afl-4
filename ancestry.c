@@ -40,6 +40,7 @@ struct ancestry_node_t *make_tree(struct person_t *person) {
 
     struct ancestry_node_t  *branch = malloc(sizeof(struct ancestry_node_t));
     branch->person = person;
+    //hvorfor null ?
     branch->mom = NULL;
     branch->dad = NULL;
     return branch;
@@ -53,6 +54,7 @@ bool add_mom(struct ancestry_node_t *child_node, struct person_t *mom_person) {
 
         struct ancestry_node_t *mom_node = malloc(sizeof(struct ancestry_node_t));
         struct person_t *mom_copy = malloc(sizeof(struct person_t));
+
         char *firstNameCopy = malloc(strlen(mom_person->first_name) + 1);
         char *lastNameCopy = malloc(strlen(mom_person->last_name) + 1);
 
@@ -62,8 +64,13 @@ bool add_mom(struct ancestry_node_t *child_node, struct person_t *mom_person) {
         mom_copy->year_born = mom_person->year_born;
 
         mom_node->person = mom_copy;
+        //hvorfor null ? 
+        mom_node->dad = NULL;
+        mom_node->mom = NULL;
 
         child_node->mom = mom_node;
+
+        printf("er morfor null? %d \n", mom_node->dad == NULL);
         return true;
     }
     return false;
@@ -86,10 +93,12 @@ bool add_dad(struct ancestry_node_t *child_node, struct person_t *dad_person) {
         dad_copy->year_born = dad_person->year_born;
 
         dad_node->person = dad_copy;
-
+        dad_node->dad = NULL;
+        dad_node->mom = NULL;
         child_node->dad = dad_node;
         return true;
     }
+    printf("who's your daddy %s\n",child_node->dad->person->first_name);
     return false;
 }
 

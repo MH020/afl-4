@@ -49,10 +49,11 @@ void large_heap_allocated_tree() {
     // Parents
     add_mom(anne_tree, make_person("Annemor", "Person", 1970));
     add_dad(anne_tree, make_person("Annefar", "Person", 1969));
-
+    printf("your dad is %s\n",anne_tree->dad->person->first_name);
     // Grandparents on mom's side
     add_mom(anne_tree->mom, make_person("Annemormor", "Person", 1950));
     add_dad(anne_tree->mom, make_person("Annemorfar", "Person", 1945));
+    printf("your dad is %s\n",anne_tree->mom->dad->person->first_name);
 
     // Grandparents on dad's side
     add_mom(anne_tree->dad, make_person("Annefarmor", "Person", 1949));
