@@ -11,6 +11,14 @@ struct person_t *make_person(char *first_name, char *last_name, int year_born) {
     // TODO: Kopiér indholdet fra `first_name` og `last_name` over i kopierne.
     // TODO: Husk at gøre plads til både alle tegnene i navnene + 1 NUL-byte.
 
+    struct person_t *person = malloc(sizeof(struct person_t));
+    char *firstNameCopy = malloc(sizeof(*first_name) + 1);
+    char *lastNameCopy = malloc(sizeof(*first_name) + 1);
+
+    person->first_name = strcpy(firstNameCopy,first_name);
+    person->last_name = strcpy(lastNameCopy,first_name);
+    person->year_born = year_born;
+
     return NULL;
 }
 
