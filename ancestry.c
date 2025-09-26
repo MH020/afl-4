@@ -30,7 +30,7 @@ void free_person(struct person_t *person) {
     free(person->last_name);
     person->last_name = NULL;
     free(person);
-    person = NULL; 
+    person = NULL;
 
 }
 
