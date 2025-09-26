@@ -30,6 +30,7 @@ void free_person(struct person_t *person) {
     free(person->last_name);
     person->last_name = NULL;
     free(person);
+    person = NULL; 
 
 }
 
@@ -69,8 +70,6 @@ bool add_mom(struct ancestry_node_t *child_node, struct person_t *mom_person) {
         mom_node->mom = NULL;
 
         child_node->mom = mom_node;
-
-        printf("er morfor null? %d \n", mom_node->dad == NULL);
         return true;
     }
     return false;
@@ -106,6 +105,20 @@ void free_tree(struct ancestry_node_t *node) {
     // TODO: Kald `free_person()` på personen i noden.
     // TODO: Kald `free_tree()` på begge forældre-stamtræer.
     // TODO: Sæt pointerne til NULL efter de er free()'et.
+    while (node->dad != NULL) {
+        free_tree(node->dad);
+        printf("hedder: %s\n", node->dad->person->first_name);
+        node->dad = NULL;
+    }
+    while (node->mom != NULL) {
+        free_tree(node->mom);
+        printf("hedder: %s\n", node->mom->person->first_name);
+        node->mom = NULL;
+    }
+    free_person(node->person);
+    free(node);
+
+
 }
 
 void print_tree_recursive(struct ancestry_node_t *node, char *prefix, bool is_last) {
